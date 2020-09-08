@@ -51,9 +51,9 @@ print("=== 读取训练集图像名称完毕")
 
 COUNT = 23
 DOWNLOAD = False
-BATCH_SIZE = 20
-LR = 0.0001
-EPOCH = 10
+BATCH_SIZE = 8
+LR = 0.00000001
+EPOCH = 2
 USE_GPU = True
 NET_PATH = "./net_tiny_2.pkl"
 
@@ -225,6 +225,12 @@ optimizer = torch.optim.Adam(net.parameters(), lr=LR)
 correct = 0
 total = 0
 
+# y_data = [0]
+# x_data = [0]
+# plt.ion()
+# plt.show()
+
+
 print("Start Training...")
 for epoch in range(EPOCH):
     loss100 = 0.0
@@ -246,6 +252,12 @@ for epoch in range(EPOCH):
         count = 50
 
         if i % count == count - 1:
+            # x_data.append(i)
+            # y_data.append(loss100 / count)
+            # plt.cla()
+            # plt.plot(x_data, y_data, "r-")
+            # plt.pause(0.3)
+
             print('[Epoch %d, Batch %5d] loss: %.3f' %
                   (epoch + 1, i + 1, loss100 / count))
             loss100 = 0.0
@@ -255,6 +267,12 @@ for epoch in range(EPOCH):
             total = 0
             print("\n")
 
+
 print("Done Training!")
 
 torch.save(net, NET_PATH)
+
+# plt.ioff()
+# plt.show()
+
+
